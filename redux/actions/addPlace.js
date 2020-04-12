@@ -1,6 +1,6 @@
-import { ADD_PLACE } from '../constant/actionIdentifier';
+import { ADD_PLACE, GET_ALL_PLACES } from '../constant/actionIdentifier';
 import * as FileSystem from 'expo-file-system';
-import { insertPlace } from '../../helpers/db';
+import { insertPlace, fetchPlaces } from '../../helpers/db';
 
 export const addPlace = (title, imageUri) => {
   return async (dispatch) => {
@@ -30,6 +30,17 @@ export const addPlace = (title, imageUri) => {
       });
     } catch (error) {
       console.log(error);
+      throw error;
+    }
+  };
+};
+
+export const loadPlaces = () => {
+  return async (dispatch) => {
+    try {
+      const allPlaces = await fetchPlaces();
+      dispatch({ type: GET_ALL_PLACES, places: allPlaces.rows._array });
+    } catch (error) {
       throw error;
     }
   };
