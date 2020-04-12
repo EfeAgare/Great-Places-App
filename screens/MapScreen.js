@@ -58,11 +58,11 @@ MapScreen.navigationOptions = (navData) => {
   const saveLocation = navData.navigation.getParam('saveLocation');
   return {
     headerTitle: 'Map',
-    headerRight: () => {
-      <TouchableOpacity style={headerButton} onPress={saveLocation}>
+    headerRight: () => (
+      <TouchableOpacity style={styles.headerButton} onPress={saveLocation}>
         <Text style={styles.headerButtonText}>Save</Text>
-      </TouchableOpacity>;
-    },
+      </TouchableOpacity>
+    ),
   };
 };
 
