@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Platform, FlatList } from 'react-native';
 import CustomHeaderButton from '../components/CustomHeaderButton';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
@@ -13,7 +13,7 @@ const PlacesListScreen = (props) => {
   useEffect(() => {
     dispatch(loadPlaces());
   }, [dispatch]);
-  
+
   return (
     <FlatList
       data={places}
