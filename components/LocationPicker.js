@@ -18,12 +18,14 @@ const LocationPicker = (props) => {
 
   const mapPickedLocation = props.navigation.getParam('pickedLocation');
 
+  const { onLocationPicked } = props;
   useEffect(() => {
     if (mapPickedLocation) {
       setPickedLocation(mapPickedLocation);
     }
-  }, [mapPickedLocation]);
-  
+    onLocationPicked(mapPickedLocation);
+  }, [mapPickedLocation, onLocationPicked]);
+
   const verifyPermissions = async () => {
     const result = await Permissions.askAsync(Permissions.LOCATION);
     if (result.status != 'granted') {
@@ -52,6 +54,10 @@ const LocationPicker = (props) => {
         timeout: 10000,
       });
       setPickedLocation({
+        lat: location.coords.latitude,
+        log: location.coords.longitude,
+      });
+      props.onLocationPicked({
         lat: location.coords.latitude,
         log: location.coords.longitude,
       });
